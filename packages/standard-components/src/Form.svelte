@@ -1,5 +1,5 @@
 <script>
-  import { Label, DatePicker, Input, Select, Toggle } from "@budibase/bbui"
+  import { Label, DatePicker, Input, Select, Toggle, RichText } from "@budibase/bbui"
   import Dropzone from "./attachments/Dropzone.svelte"
   import LinkedRowSelector from "./LinkedRowSelector.svelte"
   import ErrorsBox from "./ErrorsBox.svelte"
@@ -38,6 +38,8 @@
         <Toggle
           text={wide ? null : capitalise(schema[field].name)}
           bind:checked={$store.data[field]} />
+      {:else if schema[field].type === 'longform'}
+        <RichText bind:content={$store.data[field]} />
       {:else if schema[field].type === 'number'}
         <Input type="number" bind:value={$store.data[field]} />
       {:else if schema[field].type === 'string'}
